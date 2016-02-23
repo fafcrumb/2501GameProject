@@ -3,7 +3,6 @@
 Model::Model()
 {
 	//Map
-
 	std::ifstream fileHndl;
 
 	fileHndl.open("Assets/mapdata.txt");
@@ -11,6 +10,7 @@ Model::Model()
 	fileHndl >> mapWidth;
 	fileHndl >> mapHeight;
 
+	//load tiles from file
 	mapTiles = new int *[mapHeight];
 	for (int i = 0; i < mapHeight; i++)
 		mapTiles[i] = new int[mapWidth];
@@ -20,11 +20,11 @@ Model::Model()
 			fileHndl >> mapTiles[i][j];
 
 	//Camera
-
 	cameraWidth = cameraHeight = 8;
 	cameraCol = cameraRow = 0;
 	cameraX = cameraY = 0.f;
 
+	//tiles to load into tilemap
 	cameraTiles = new int[cameraWidth * cameraHeight];
 	int k = 0;
 	for (int i = cameraRow; i < cameraRow + cameraHeight; i++)
@@ -35,14 +35,13 @@ Model::Model()
 		}
 
 	//Player
-
 	playerCol = playerRow = 3;
 	playerX = playerY = 32 * (float)playerRow + 16;
 	playerSpeed = 8;
 
 	//Car
 
-	carCol, carRow = 5;
+	carCol = carRow = 5;
 
 	carLocation = sf::Vector2f(144, 144);
 
@@ -59,6 +58,7 @@ void Model::update(sf::Time deltaTime)
 {
 	//Player
 
+	//bounds
 	if (playerX + 16 >= (mapWidth-1) * 32)
 		playerX = (float)(mapWidth-1) * 32 - 16;
 	if (playerX - 16 <= 0)
@@ -72,14 +72,14 @@ void Model::update(sf::Time deltaTime)
 	playerRow = (int)playerY / 32;
 
 	//Car
-
+	
 	//max speed
-	if (abs(carSpeed) > 100)
+	if (abs(carSpeed) > 150)
 	{
 		if (carSpeed < 0)
-			carSpeed = -100;
+			carSpeed = -150;
 		else
-			carSpeed = 100;
+			carSpeed = 150;
 	}
 
 	//friction
@@ -95,8 +95,8 @@ void Model::update(sf::Time deltaTime)
 		if (carSpeed > 0)
 			carSpeed = 0;
 	}
-		
 
+	//main car logic
 
 	sf::Vector2f frontWheel = carLocation + wheelBase / 2 * sf::Vector2f(cos(carHeading), sin(carHeading));
 	sf::Vector2f backWheel = carLocation - wheelBase / 2 * sf::Vector2f(cos(carHeading), sin(carHeading));
@@ -115,6 +115,7 @@ void Model::update(sf::Time deltaTime)
 	cameraX = playerX - 112.f;
 	cameraY = playerY - 112.f;
 
+	//camera bounds
 	if (cameraX + cameraWidth * 32 >= mapWidth * 32)
 		cameraX = (float)mapWidth * 32 - cameraWidth * 32;
 	if (cameraX <= 0)
@@ -127,6 +128,7 @@ void Model::update(sf::Time deltaTime)
 	cameraCol = (int)cameraX / 32;
 	cameraRow = (int)cameraY / 32;
 
+	//camera tiles to load into tilemap
 	int k = 0;
 	for (int i = cameraRow; i < cameraRow + cameraHeight; i++)
 		for (int j = cameraCol; j < cameraCol + cameraWidth; j++)
