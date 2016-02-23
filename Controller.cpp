@@ -23,25 +23,32 @@ void Controller::inputs()
 		}
 	}
 
+	//For now: swtich between player movement and car
+	//movement by commenting out the input for the one
+	//not in use
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 	{
-		model->playerY -= model->playerSpeed;
-		model->carSpeed += 10;
+		//model->playerY -= model->playerSpeed;
+		model->carSpeed += 15;
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 	{
-		model->playerY += model->playerSpeed;
-		model->carSpeed -= 10;
+		//model->playerY += model->playerSpeed;
+		model->carSpeed -= 15;
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 	{
-		model->playerX -= model->playerSpeed;
-		model->steerAngle -= 0.01;
+		//model->playerX -= model->playerSpeed;
+		model->steerAngle = -0.5;
 	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 	{
-		model->playerX += model->playerSpeed;
-		model->steerAngle += 0.01;
+		//model->playerX += model->playerSpeed;
+		model->steerAngle = 0.5;
+	}
+	else
+	{
+		model->steerAngle = 0;
 	}
 }
