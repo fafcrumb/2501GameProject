@@ -8,7 +8,7 @@ View::View(Model* m)
 	//640, 640
 	//225, 225
 	window.create(sf::VideoMode(225, 225), "Assignment 3");
-	window.setFramerateLimit(4);
+	window.setFramerateLimit(60);
 
 	map.load("Assets/tileset.jpg", sf::Vector2u(32, 32), model->cameraTiles, model->cameraWidth, model->cameraHeight);
 
