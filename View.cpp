@@ -20,8 +20,8 @@ View::View(Model* m)
 	player.setPosition(sf::Vector2f(model->playerX, model->playerY));
 
 	//Car
-	car.setSize(sf::Vector2f(22, 10));
-	car.setOrigin(sf::Vector2f(11, 5));
+	car.setSize(sf::Vector2f(32, 10));
+	car.setOrigin(sf::Vector2f(16, 5));
 	car.setFillColor(sf::Color::Blue);
 	car.setPosition(sf::Vector2f(model->carLocation.x - model->cameraX, model->carLocation.y - model->cameraY));
 }
@@ -43,7 +43,7 @@ void View::render()
 	window.draw(player);
 
 	//Car
-	float PI = 3.14159265;
+	float PI = 3.14159265f;
 	car.setPosition(sf::Vector2f(model->carLocation.x - model->cameraX, model->carLocation.y - model->cameraY));
 	car.setRotation(model->carHeading * 180 / PI);
 	window.draw(car);
