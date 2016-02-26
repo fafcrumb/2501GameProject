@@ -1,29 +1,18 @@
 #include "View.hpp"
 #include <iostream>
+
 View::View(Model* m)
 {
 	this->model = m;
 
-	//1280, 1024
-	//640, 640
-	//225, 225
-	window.create(sf::VideoMode(225, 225), "Assignment 3");
+	window.create(sf::VideoMode(225, 225), "Progress Report");
 	window.setFramerateLimit(60);
 
-	//Map
-	map.load("Assets/tileset.jpg", sf::Vector2u(32, 32), model->cameraTiles, model->cameraWidth, model->cameraHeight);
+	map.loadTexture("Assets/tileset.jpg");
+	map.loadTiles(sf::Vector2u(32, 32), model->camera->getTiles(), model->camera->getWidth(), model->camera->getHeight());
 
-	//Player
-	player.setSize(sf::Vector2f(32, 32));
-	player.setOrigin(sf::Vector2f(16, 16));
-	player.setFillColor(sf::Color::Red);
-	player.setPosition(sf::Vector2f(model->playerX, model->playerY));
-
-	//Car
-	car.setSize(sf::Vector2f(32, 10));
-	car.setOrigin(sf::Vector2f(16, 5));
-	car.setFillColor(sf::Color::Blue);
-	car.setPosition(sf::Vector2f(model->carLocation.x - model->cameraX, model->carLocation.y - model->cameraY));
+	renderables.push_back(model->player);
+	renderables.push_back(model->truck);
 }
 
 View::~View()
@@ -33,39 +22,32 @@ void View::render()
 {
 	window.clear();
 
-	//Map
-	map.setPosition(sf::Vector2f(-(int)model->cameraX % 32, -(int)model->cameraY % 32));
-	map.load("Assets/tileset.jpg", sf::Vector2u(32, 32), model->cameraTiles, model->cameraWidth, model->cameraHeight);
+	map.setPosition(sf::Vector2f(-(int)model->camera->getX() % 32, -(int)model->camera->getY() % 32));
+	map.loadTiles(sf::Vector2u(32, 32), model->camera->getTiles(), model->camera->getWidth(), model->camera->getHeight());
 	window.draw(map);
 
-	//Player
-	player.setPosition(sf::Vector2f(model->playerX - model->cameraX, model->playerY - model->cameraY));
-	window.draw(player);
-
-	//Car
-	float PI = 3.14159265f;
-	car.setPosition(sf::Vector2f(model->carLocation.x - model->cameraX, model->carLocation.y - model->cameraY));
-	car.setRotation(model->carHeading * 180 / PI);
-	window.draw(car);
+	for (Renderable* object : renderables)
+		object->render(this);
 
 	window.display();
 
-
 	//Optional console based grid view (set framerate to 2 or 3 when using)
-	/*for (int i = 0; i < model->mapHeight; i++)
+	/*
+	for (int i = 0; i < model->mapHeight; i++)
 	{
 		for (int j = 0; j < model->mapWidth; j++)
 		{
-			if (model->playerCol == j && model->playerRow == i)
+			if (model->player->getCol() == j && model->player->getRow() == i)
 				std::cout << "$" << " ";
-			else if (model->cameraCol == j && model->cameraRow == i)
+			else if (model->camera->getCol() == j && model->camera->getRow() == i)
 				std::cout << "*" << " ";
-			else if (model->carCol == j && model->carRow == i)
+			else if (model->truck->getCol() == j && model->truck->getRow() == i)
 				std::cout << "=" << " ";
 			else
 				std::cout << model->mapTiles[i][j] << " ";
 		}
 		std::cout << std::endl;
 	}
-	std::cout << "\n\n\n\n";*/
+	std::cout << "\n\n\n\n";
+	*/
 }

@@ -2,8 +2,11 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "Renderable.hpp"
 #include "Model.hpp"
 #include "TileMap.hpp"
+
+class Model;
 
 class View
 {
@@ -19,7 +22,5 @@ public:
 
 	TileMap map;
 
-	sf::RectangleShape player;
-
-	sf::RectangleShape car;
+	std::vector<Renderable*> renderables;
 };

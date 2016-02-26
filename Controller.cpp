@@ -20,35 +20,45 @@ void Controller::inputs()
 		case sf::Event::Closed:
 			view->window.close();
 			break;
+		case sf::Event::KeyPressed:
+			if (event.key.code == sf::Keyboard::Space) //switch movement/camera between player and car with SPACE (for demo purposes)
+				model->inTruck = !model->inTruck;
+			break;
 		}
 	}
 
-	//For now: swtich between player movement and car
-	//movement by commenting out the input for the one
-	//not in use
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 	{
-		//model->playerY -= model->playerSpeed;
-		model->carSpeed += 15;
+		if(!model->inTruck)
+			model->player->moveUp();
+		else
+			model->truck->speedUp();
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 	{
-		//model->playerY += model->playerSpeed;
-		model->carSpeed -= 15;
+		if(!model->inTruck)
+			model->player->moveDown();
+		else
+			model->truck->speedDown();
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 	{
-		//model->playerX -= model->playerSpeed;
-		model->steerAngle = -0.5;
+		if(!model->inTruck)
+			model->player->moveLeft();
+		else
+			model->truck->steerLeft();
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 	{
-		//model->playerX += model->playerSpeed;
-		model->steerAngle = 0.5;
+		if(!model->inTruck)
+			model->player->moveRight();
+		else
+			model->truck->steerRight();
 	}
 	else
 	{
-		model->steerAngle = 0;
+		if(model->inTruck)
+			model->truck->steerStraight();
 	}
 }
