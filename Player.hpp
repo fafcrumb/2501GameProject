@@ -24,6 +24,7 @@ public:
 
 private:
 	int col, row;
+	int xMod, yMod;
 	float x, y;
 	int speed;
 	sf::RectangleShape rect;
