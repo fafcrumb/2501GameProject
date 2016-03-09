@@ -12,7 +12,7 @@ class TileMap : public sf::Drawable, public sf::Transformable
 public:
 
 	bool loadTexture(const std::string&);
-	bool loadTiles(sf::Vector2u, const int*, unsigned int, unsigned int);
+	bool loadTiles(sf::Vector2u, Tile**, unsigned int, unsigned int);
 
 private:
 
