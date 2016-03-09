@@ -11,7 +11,7 @@ bool TileMap::loadTexture(const std::string& tileset)
 		return true;
 }
 
-bool TileMap::loadTiles(sf::Vector2u tileSize, const int* tiles, unsigned int width, unsigned int height)
+bool TileMap::loadTiles(sf::Vector2u tileSize, Tile** tiles, unsigned int width, unsigned int height)
 {
 	// resize the vertex array to fit the level size
 	m_vertices.setPrimitiveType(sf::Quads);
@@ -22,7 +22,7 @@ bool TileMap::loadTiles(sf::Vector2u tileSize, const int* tiles, unsigned int wi
 		for (unsigned int j = 0; j < height; ++j)
 		{
 			// get the current tile number
-			int tileNumber = tiles[i + j * width];
+			int tileNumber = tiles[i + j * width]->returnMapCode();
 
 			// find its position in the tileset texture
 			int tu = tileNumber % (m_tileset.getSize().x / tileSize.x);
