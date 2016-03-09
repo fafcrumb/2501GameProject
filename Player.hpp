@@ -1,5 +1,5 @@
 #pragma once
-
+// Added modifiers
 #include <SFML/Graphics.hpp>
 
 #include "Model.hpp"
@@ -24,7 +24,7 @@ public:
 
 private:
 	int col, row;
-	int xMod, yMod;
+	int xMod, yMod; // New
 	float x, y;
 	int speed;
 	sf::RectangleShape rect;
