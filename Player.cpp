@@ -1,5 +1,6 @@
 #include "Player.hpp"
-
+// Overhauled movement to incorporate a check before move collision
+// X and Y displacement removed from move functions and placed in update with the move functions instead changing a modifier which causes the displacement once update occurs
 Player::Player()
 {
 	col = row = 3;
@@ -17,6 +18,7 @@ Player::~Player()
 
 void Player::update(Model* model, sf::Time deltaTime)
 {
+	// New ///////
 	int tempCol = (int)(x + 16 * xMod) / 32;
 	int tempRow = (int)(y + 16 * yMod) / 32;
 	//Player bounds
@@ -32,11 +34,11 @@ void Player::update(Model* model, sf::Time deltaTime)
 		x += 16 * xMod;
 	if ( !(y + 16 >= (model->mapHeight - 1) * 32) && !(y - 16 <= 0) && model->tileProperties[tempRow][col]->returnBlockable() == 0)
 		y += 16 * yMod;
-
+	///////////////////////////////
 	col = (int)x / 32;
 	row = (int)y / 32;
-	xMod = 0;
-	yMod = 0;
+	xMod = 0; // New
+	yMod = 0; // New
 }
 
 void Player::render(View* view)
@@ -45,7 +47,7 @@ void Player::render(View* view)
 	view->window.draw(rect);
 }
 
-
+/// Functions changed
 void Player::moveUp() { yMod = -1; }
 void Player::moveDown() { yMod = 1; }
 void Player::moveLeft() { xMod = -1; }
