@@ -24,7 +24,7 @@ public:
 	int mapWidth, mapHeight;
 	int **mapTiles;
 
-	Tile ***tileProperties;
+	Tile ***tileProperties; // New
 	Camera* camera;
 	Player* player;
 	DeliveryTruck* truck;
