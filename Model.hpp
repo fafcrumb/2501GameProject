@@ -7,6 +7,7 @@
 #include "Player.hpp"
 #include "DeliveryTruck.hpp"
 #include "Camera.hpp"
+#include "Tile.hpp"
 
 class Player;
 class DeliveryTruck;
@@ -23,6 +24,7 @@ public:
 	int mapWidth, mapHeight;
 	int **mapTiles;
 
+	Tile ***tileProperties;
 	Camera* camera;
 	Player* player;
 	DeliveryTruck* truck;
