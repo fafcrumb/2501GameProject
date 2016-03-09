@@ -6,16 +6,16 @@
 class Camera : public Updateable
 {
 public:
-	Camera(Tile***);
+	Camera(Tile***); // Change
 	~Camera();
 	void update(Model*, sf::Time);
 	float getX(); float getY();
 	int getWidth(); int getHeight();
 	int getCol(); int getRow();
-	Tile** getTiles();
+	Tile** getTiles(); // change
 private:
 	int width, height;
 	int col, row;
 	float x, y;
-	Tile **tiles;
+	Tile **tiles; // Change
 };
