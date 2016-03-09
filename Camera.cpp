@@ -1,5 +1,5 @@
 #include "Camera.hpp"
-
+//Camera class changed to support an array of tile objects instead of an array ints
 Camera::Camera(Tile*** mapTiles)
 {
 	width = height = 8;
