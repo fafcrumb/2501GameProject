@@ -1,5 +1,5 @@
 #pragma once
-
+//Included new Tile class header as well as changed data types and functions related to the int array for the map to a Tile array
 #include "Model.hpp"
 #include "Tile.hpp"
 
