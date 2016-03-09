@@ -49,12 +49,22 @@ void DeliveryTruck::update(Model* model, sf::Time deltaTime)
 	backWheel += speed * deltaTime.asSeconds() * sf::Vector2f(cos(heading), sin(heading));
 	frontWheel += speed * deltaTime.asSeconds() * sf::Vector2f(cos(heading + steerAngle), sin(heading + steerAngle));
 
-	location = (frontWheel + backWheel) / 2.f;
-	heading = atan2(frontWheel.y - backWheel.y, frontWheel.x - backWheel.x);
+	int tempColFront = (int)frontWheel.x / 32;
+	int tempRowFront = (int)frontWheel.y / 32;
+	int tempColBack = (int)backWheel.x / 32;
+	int tempRowBack = (int)backWheel.y / 32;
+
+	if (model->tileProperties[tempRowFront][tempColFront]->returnBlockable() == 0 && model->tileProperties[tempRowBack][tempColBack]->returnBlockable() == 0) {
+
+		location = (frontWheel + backWheel) / 2.f;
+		heading = atan2(frontWheel.y - backWheel.y, frontWheel.x - backWheel.x);
 
 
-	col = (int)location.x / 32;
-	row = (int)location.y / 32;
+		col = (int)location.x / 32;
+		row = (int)location.y / 32;
+	}
+	else
+		speed = 0;
 }
 
 void DeliveryTruck::render(View* view)
