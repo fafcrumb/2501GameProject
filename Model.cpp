@@ -1,5 +1,5 @@
 #include "Model.hpp"
-
+// Implemented a double array of Tile pointers and made the camera out of the Tile pointers
 Model::Model()
 {
 	std::ifstream fileHndl;
