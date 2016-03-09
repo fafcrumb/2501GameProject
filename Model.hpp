@@ -1,5 +1,5 @@
 #pragma once
-
+// Added double array of tile pointers (The Triple Pointer)
 #include <fstream>
 #include <SFML/Graphics.hpp>
 
