@@ -17,18 +17,26 @@ Player::~Player()
 
 void Player::update(Model* model, sf::Time deltaTime)
 {
+	int tempCol = (int)(x + 16 * xMod) / 32;
+	int tempRow = (int)(y + 16 * yMod) / 32;
 	//Player bounds
-	if (x + 16 >= (model->mapWidth - 1) * 32)
+	/*if (x + 16 >= (model->mapWidth - 1) * 32)
 		x = (float)(model->mapWidth - 1) * 32 - 16;
 	if (x - 16 <= 0)
 		x = 16;
 	if (y + 16 >= (model->mapHeight - 1) * 32)
 		y = (float)(model->mapHeight - 1) * 32 - 16;
 	if (y - 16 <= 0)
-		y = 16;
+		y = 16;*/
+	if (!(x + 16 >= (model->mapWidth - 1) * 32) && !(x - 16 <= 0) && model->tileProperties[row][tempCol]->returnBlockable() == 0)
+		x += 16 * xMod;
+	if ( !(y + 16 >= (model->mapHeight - 1) * 32) && !(y - 16 <= 0) && model->tileProperties[tempRow][col]->returnBlockable() == 0)
+		y += 16 * yMod;
 
 	col = (int)x / 32;
 	row = (int)y / 32;
+	xMod = 0;
+	yMod = 0;
 }
 
 void Player::render(View* view)
@@ -37,10 +45,8 @@ void Player::render(View* view)
 	view->window.draw(rect);
 }
 
-void Player::moveUp() { y -= speed; }
 
-void Player::moveDown() { y += speed; }
-
-void Player::moveLeft() { x -= speed; }
-
-void Player::moveRight() { x += speed; }
+void Player::moveUp() { yMod = -1; }
+void Player::moveDown() { yMod = 1; }
+void Player::moveLeft() { xMod = -1; }
+void Player::moveRight() { xMod = 1; }
