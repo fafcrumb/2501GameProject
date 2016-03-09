@@ -1,13 +1,12 @@
 #include "Camera.hpp"
 
-Camera::Camera(int **mapTiles)
+Camera::Camera(Tile*** mapTiles)
 {
 	width = height = 8;
 	col = row = 0;
 	x = y = 0.f;
 
 	//Visible tiles to load into tilemap class
-	tiles = new int[width * height];
 	int k = 0;
 	for (int i = row; i < row + height; i++)
 		for (int j = col; j < col + width; j++)
@@ -52,7 +51,7 @@ void Camera::update(Model* model, sf::Time deltaTime)
 	for (int i = row; i < row + height; i++)
 		for (int j = col; j < col + width; j++)
 		{
-			tiles[k] = model->mapTiles[i][j];
+			tiles[k] = model->tileProperties[i][j];
 			k++;
 		}
 }
@@ -69,7 +68,4 @@ int Camera::getCol() { return col; }
 
 int Camera::getRow() { return row; }
 
-int* Camera::getTiles() { return tiles; }
-
-
-
+Tile** Camera::getTiles() { return tiles; }
