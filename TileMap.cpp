@@ -1,4 +1,7 @@
 #include "TileMap.hpp"
+// Changed loadTiles second parameter to support recieving a Tile double pointer
+// tileNumber is now obtained from Tile double pointer
+
 
 //Separated loading texture image from loading
 //tile values
@@ -22,7 +25,7 @@ bool TileMap::loadTiles(sf::Vector2u tileSize, Tile** tiles, unsigned int width,
 		for (unsigned int j = 0; j < height; ++j)
 		{
 			// get the current tile number
-			int tileNumber = tiles[i + j * width]->returnMapCode();
+			int tileNumber = tiles[i + j * width]->returnMapCode(); // New
 
 			// find its position in the tileset texture
 			int tu = tileNumber % (m_tileset.getSize().x / tileSize.x);
