@@ -1,7 +1,8 @@
 #pragma once
-
+// loadTiles second parameter changed to support tile** object
+// Include Tile.h
 #include <SFML/Graphics.hpp>
-
+#include "Tile.h"
 /*
  TileMap vertex array class
  from SFML tutorial
