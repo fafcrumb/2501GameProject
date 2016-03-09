@@ -1,5 +1,5 @@
 #include "DeliveryTruck.hpp"
-
+// Primative check before move collision detection implemented
 DeliveryTruck::DeliveryTruck()
 {
 	col = row = 5;
@@ -49,11 +49,12 @@ void DeliveryTruck::update(Model* model, sf::Time deltaTime)
 	backWheel += speed * deltaTime.asSeconds() * sf::Vector2f(cos(heading), sin(heading));
 	frontWheel += speed * deltaTime.asSeconds() * sf::Vector2f(cos(heading + steerAngle), sin(heading + steerAngle));
 
-	int tempColFront = (int)frontWheel.x / 32;
-	int tempRowFront = (int)frontWheel.y / 32;
-	int tempColBack = (int)backWheel.x / 32;
-	int tempRowBack = (int)backWheel.y / 32;
+	int tempColFront = (int)frontWheel.x / 32; // New
+	int tempRowFront = (int)frontWheel.y / 32; // New
+	int tempColBack = (int)backWheel.x / 32; // New
+	int tempRowBack = (int)backWheel.y / 32; // New
 
+	// New ///////
 	if (model->tileProperties[tempRowFront][tempColFront]->returnBlockable() == 0 && model->tileProperties[tempRowBack][tempColBack]->returnBlockable() == 0) {
 
 		location = (frontWheel + backWheel) / 2.f;
@@ -63,8 +64,10 @@ void DeliveryTruck::update(Model* model, sf::Time deltaTime)
 		col = (int)location.x / 32;
 		row = (int)location.y / 32;
 	}
+	
 	else
 		speed = 0;
+	///////////
 }
 
 void DeliveryTruck::render(View* view)
