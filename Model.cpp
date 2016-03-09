@@ -16,9 +16,12 @@ Model::Model()
 
 	for (int i = 0; i < mapHeight; i++)
 		for (int j = 0; j < mapWidth; j++)
+		{
 			fileHndl >> mapTiles[i][j];
+			tileProperties[i][j] = new Tile(mapTiles[i][j]);
+		}
 
-	camera = new Camera(mapTiles);
+	camera = new Camera(tileProperties);
 	player = new Player();
 	truck = new DeliveryTruck();
 
