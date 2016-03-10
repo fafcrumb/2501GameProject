@@ -1,5 +1,5 @@
 #include "Model.hpp"
-// Implemented a double array of Tile pointers and made the camera out of the Tile pointers
+
 Model::Model()
 {
 	std::ifstream fileHndl;
@@ -8,18 +8,23 @@ Model::Model()
 
 	fileHndl >> mapWidth;
 	fileHndl >> mapHeight;
+	int width = mapWidth;
+	tileProperties = new Tile **[mapHeight];
 
 	//load map tiles from file
 	mapTiles = new int *[mapHeight];
 	for (int i = 0; i < mapHeight; i++)
 		mapTiles[i] = new int[mapWidth];
-
 	for (int i = 0; i < mapHeight; i++)
+	{
+		tileProperties[i] = new Tile*[mapWidth];
 		for (int j = 0; j < mapWidth; j++)
 		{
+			int temp;
 			fileHndl >> mapTiles[i][j];
 			tileProperties[i][j] = new Tile(mapTiles[i][j]);
 		}
+	}
 
 	camera = new Camera(tileProperties);
 	player = new Player();
