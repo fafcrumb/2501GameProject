@@ -6,6 +6,7 @@ DeliveryTruck::DeliveryTruck()
 	location = sf::Vector2f(144, 144);
 	heading = speed = steerAngle = 0;
 	wheelBase = 32;
+	maxSpeed = 200;
 
 	rect.setSize(sf::Vector2f(32, 10));
 	rect.setOrigin(sf::Vector2f(16, 5));
@@ -18,12 +19,12 @@ DeliveryTruck::~DeliveryTruck()
 void DeliveryTruck::update(Model* model, sf::Time deltaTime)
 {
 	//Max speed
-	if (abs(speed) > 200)
+	if (abs(speed) > maxSpeed)
 	{
 		if (speed < 0)
-			speed = -200;
+			speed = -maxSpeed;
 		else
-			speed = 200;
+			speed = maxSpeed;
 	}
 
 	//Friction
@@ -73,3 +74,11 @@ void DeliveryTruck::steerLeft() { steerAngle = -0.5; }
 void DeliveryTruck::steerRight() { steerAngle = 0.5; }
 
 void DeliveryTruck::steerStraight() { steerAngle = 0; }
+
+void DeliveryTruck::boost() { maxSpeed = 400; }
+
+void DeliveryTruck::boostOver() {
+	if (maxSpeed > 200) {
+		maxSpeed -= 5;
+	}
+}
