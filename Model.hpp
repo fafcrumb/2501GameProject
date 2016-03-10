@@ -7,6 +7,8 @@
 #include "Player.hpp"
 #include "DeliveryTruck.hpp"
 #include "Camera.hpp"
+#include "Speedometer.hpp"
+#include "TimeDisplay.hpp"
 
 class Player;
 class DeliveryTruck;
