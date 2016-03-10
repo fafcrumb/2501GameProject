@@ -9,7 +9,7 @@ public:
 	~Tile();
 	int returnBlockable();
 	int returnMapCode();
-
+	void setBlockade();
 private:
 	int blockability;
 	int activeMapCode;
