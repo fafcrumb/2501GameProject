@@ -1,7 +1,7 @@
 #include "Tile.hpp"
-// See hpp file for description
+
 Tile::Tile(int code) {
-	if (code > 4) {
+	if (code == 0) {
 		blockability = 1;
 	}
 	else {
@@ -15,3 +15,7 @@ Tile::~Tile(){}
 
 int Tile::returnBlockable() { return blockability; }
 int Tile::returnMapCode() { return activeMapCode; }
+void Tile::setBlockade() {
+	blockability = 1;
+	activeMapCode = 2;
+}
