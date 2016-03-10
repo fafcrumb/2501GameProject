@@ -21,6 +21,8 @@ Model::Model()
 	camera = new Camera(mapTiles);
 	player = new Player();
 	truck = new DeliveryTruck();
+	speedometer = new Speedometer();
+	timeDisplay= new TimeDisplay();
 
 	updateables.push_back(camera);
 	updateables.push_back(player);
