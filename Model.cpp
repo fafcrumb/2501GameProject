@@ -25,6 +25,8 @@ Model::Model()
 	updateables.push_back(camera);
 	updateables.push_back(player);
 	updateables.push_back(truck);
+	updateables.push_back(speedometer);
+	updateables.push_back(timeDisplay);
 
 	bool inTruck = false;
 }
