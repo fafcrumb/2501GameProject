@@ -1,5 +1,5 @@
 #include "DeliveryTruck.hpp"
-// Primative check before move collision detection implemented
+
 DeliveryTruck::DeliveryTruck()
 {
 	col = row = 5;
@@ -49,25 +49,25 @@ void DeliveryTruck::update(Model* model, sf::Time deltaTime)
 	backWheel += speed * deltaTime.asSeconds() * sf::Vector2f(cos(heading), sin(heading));
 	frontWheel += speed * deltaTime.asSeconds() * sf::Vector2f(cos(heading + steerAngle), sin(heading + steerAngle));
 
-	int tempColFront = (int)frontWheel.x / 32; // New
-	int tempRowFront = (int)frontWheel.y / 32; // New
-	int tempColBack = (int)backWheel.x / 32; // New
-	int tempRowBack = (int)backWheel.y / 32; // New
-
-	// New ///////
-	if (model->tileProperties[tempRowFront][tempColFront]->returnBlockable() == 0 && model->tileProperties[tempRowBack][tempColBack]->returnBlockable() == 0) {
-
-		location = (frontWheel + backWheel) / 2.f;
-		heading = atan2(frontWheel.y - backWheel.y, frontWheel.x - backWheel.x);
+	float tempColFront = frontWheel.x / 32;
+	float tempRowFront = frontWheel.y / 32;
+	float tempColBack = backWheel.x / 32;
+	float tempRowBack = backWheel.y / 32;
+	if (tempColFront >= 0.01 && tempColFront <= model->mapWidth && tempColBack >= 0.01 && tempColBack <= model->mapWidth && tempRowFront >= 0.01 && tempRowFront <= model->mapHeight && tempRowBack >= 0.01 && tempRowBack <= model->mapHeight) {
+		if (model->tileProperties[(int)tempRowFront][(int)tempColFront]->returnBlockable() == 0 && model->tileProperties[(int)tempRowBack][(int)tempColBack]->returnBlockable() == 0) {
+			location = (frontWheel + backWheel) / 2.f;
+			heading = atan2(frontWheel.y - backWheel.y, frontWheel.x - backWheel.x);
 
 
-		col = (int)location.x / 32;
-		row = (int)location.y / 32;
+			col = (int)location.x / 32;
+			row = (int)location.y / 32;
+
+		}
+		else
+			speed = 0;
 	}
-	
 	else
 		speed = 0;
-	///////////
 }
 
 void DeliveryTruck::render(View* view)
