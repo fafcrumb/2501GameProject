@@ -1,6 +1,7 @@
 #pragma once
 // Added double array of tile pointers (The Triple Pointer)
 #include <fstream>
+#include <stdlib.h>
 #include <SFML/Graphics.hpp>
 
 #include "Updateable.hpp"
@@ -23,6 +24,7 @@ public:
 
 	int mapWidth, mapHeight;
 	int **mapTiles;
+	int roadBlocks;
 
 	Tile ***tileProperties; // New
 	Camera* camera;
