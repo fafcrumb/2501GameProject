@@ -53,7 +53,7 @@ void DeliveryTruck::update(Model* model, sf::Time deltaTime)
 	float tempRowFront = frontWheel.y / 32;
 	float tempColBack = backWheel.x / 32;
 	float tempRowBack = backWheel.y / 32;
-	if (tempColFront >= 0.01 && tempColFront <= model->mapWidth && tempColBack >= 0.01 && tempColBack <= model->mapWidth && tempRowFront >= 0.01 && tempRowFront <= model->mapHeight && tempRowBack >= 0.01 && tempRowBack <= model->mapHeight) {
+	if (tempColFront >= 0.01 && tempColFront <= model->mapWidth - 1.01 && tempColBack >= 0.01 && tempColBack <= model->mapWidth-1.01 && tempRowFront >= 0.01 && tempRowFront <= model->mapHeight-1.01 && tempRowBack >= 0.01 && tempRowBack <= model->mapHeight-1.01) {
 		if (model->tileProperties[(int)tempRowFront][(int)tempColFront]->returnBlockable() == 0 && model->tileProperties[(int)tempRowBack][(int)tempColBack]->returnBlockable() == 0) {
 			location = (frontWheel + backWheel) / 2.f;
 			heading = atan2(frontWheel.y - backWheel.y, frontWheel.x - backWheel.x);
