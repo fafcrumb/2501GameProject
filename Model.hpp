@@ -10,7 +10,9 @@
 
 class Player;
 class DeliveryTruck;
+class Speedometer;
 class Camera;
+class TimeDisplay;
 
 class Model
 {
@@ -26,6 +28,8 @@ public:
 	Camera* camera;
 	Player* player;
 	DeliveryTruck* truck;
+	Speedometer* speedometer;
+	TimeDisplay* timeDisplay;
 
 	std::vector<Updateable*> updateables;
 

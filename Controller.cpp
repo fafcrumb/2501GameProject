@@ -26,7 +26,17 @@ void Controller::inputs()
 			break;
 		}
 	}
-
+	
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::RShift))
+	{
+		if (model->inTruck)
+			model->truck->boost();
+	}
+	else 
+	{
+		if (model->inTruck)
+			model->truck->boostOver();
+	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 	{
 		if(!model->inTruck)
