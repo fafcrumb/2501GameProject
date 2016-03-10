@@ -1,6 +1,6 @@
 #include "Camera.hpp"
-//Camera class changed to support an array of tile objects instead of an array ints
-Camera::Camera(Tile*** mapTiles) //change
+
+Camera::Camera(Tile*** mapTiles)
 {
 	width = height = 8;
 	col = row = 0;
@@ -8,10 +8,11 @@ Camera::Camera(Tile*** mapTiles) //change
 
 	//Visible tiles to load into tilemap class
 	int k = 0;
+	tiles = new Tile*[height * width];
 	for (int i = row; i < row + height; i++)
 		for (int j = col; j < col + width; j++)
 		{
-			tiles[k] = mapTiles[i][j]; // Affected
+			tiles[k] = mapTiles[i][j];
 			k++;
 		}
 }
@@ -51,7 +52,7 @@ void Camera::update(Model* model, sf::Time deltaTime)
 	for (int i = row; i < row + height; i++)
 		for (int j = col; j < col + width; j++)
 		{
-			tiles[k] = model->tileProperties[i][j]; // Affected
+			tiles[k] = model->tileProperties[i][j];
 			k++;
 		}
 }
@@ -68,4 +69,7 @@ int Camera::getCol() { return col; }
 
 int Camera::getRow() { return row; }
 
-Tile** Camera::getTiles() { return tiles; } //change
+Tile** Camera::getTiles() { return tiles; }
+
+
+
