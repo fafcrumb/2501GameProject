@@ -13,6 +13,8 @@ View::View(Model* m)
 
 	renderables.push_back(model->player);
 	renderables.push_back(model->truck);
+	renderables.push_back(model->speedometer);
+	renderables.push_back(model->timeDisplay);
 }
 
 View::~View()
