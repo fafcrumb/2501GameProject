@@ -32,5 +32,6 @@ private:
 	float steerAngle;
 	float wheelBase; // the distance between the two axles
 	sf::Texture texture;
+	sf::RectangleShape moveTest;
 	sf::Sprite car;
 };
