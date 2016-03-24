@@ -36,7 +36,16 @@ void Controller::inputs()
 			break;
 		}
 	}
-
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+	{
+		if (model->player->inVehicle)
+			model->truck->boost();
+	}
+	else
+	{
+		if (model->player->inVehicle)
+			model->truck->boostOver();
+	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 	{
 		if (!model->player->inVehicle)
