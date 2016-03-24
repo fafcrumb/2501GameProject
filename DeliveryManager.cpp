@@ -1,12 +1,25 @@
 #include "DeliveryManager.hpp"
 #include <iostream>
+
 DeliveryManager::DeliveryManager(std::vector<sf::Vector2u> allSidewalkTiles)
 {
-	pickupMan.setFillColor(sf::Color::Blue);
-	pickupMan.setRadius(20);
+	pickupManImage.loadFromFile("Assets/actor.png");
+	dropOffManImage.loadFromFile("Assets/actor.png");
 
-	dropOffMan.setFillColor(sf::Color::Cyan);
-	dropOffMan.setRadius(20);
+	pickupManImage.createMaskFromColor(sf::Color::White);
+	dropOffManImage.createMaskFromColor(sf::Color::White);
+
+	pickupManTexture.loadFromImage(pickupManImage);
+	dropOffManTexture.loadFromImage(dropOffManImage);
+
+	pickupManTexture.setSmooth(true);
+	dropOffManTexture.setSmooth(true);
+
+	pickupManSprite.setTexture(pickupManTexture);
+	dropOffManSprite.setTexture(dropOffManTexture);
+
+	item.setSize(sf::Vector2f(64, 64));
+	item.setOrigin(sf::Vector2f(32, 32));
 
 	availableTiles = allSidewalkTiles;
 
@@ -54,12 +67,31 @@ void DeliveryManager::render(View* view)
 	for (unsigned int i = 0; i < deliveries.size(); i++)
 	{
 		sf::Vector2u pickupPoint = deliveries[i]->getPickupPoint();
-		pickupMan.setPosition(sf::Vector2f(pickupPoint.x * 130 + 45, pickupPoint.y * 130 + 45));
-		view->window.draw(pickupMan);
+		pickupManSprite.setPosition(sf::Vector2f(pickupPoint.x * 130 + 45, pickupPoint.y * 130 + 45));
+		pickupManSprite.setColor(deliveries[i]->getColor());
+		if (deliveries[i]->getMiniMe())
+		{
+			if (!deliveries[i]->isPickedUp())
+			{
+				item.setPosition(sf::Vector2f(pickupPoint.x * 130 + 45, pickupPoint.y * 130 + 45));
+				item.setFillColor(deliveries[i]->getColor());
+				view->window.draw(item);
+			}
+			pickupManSprite.setScale(sf::Vector2f(2, 2));
+		}
+		else 
+			pickupManSprite.setScale(sf::Vector2f(1, 1));
+		view->window.draw(pickupManSprite);
 
 		sf::Vector2u dropOffPoint = deliveries[i]->getDropoffPoint();
-		dropOffMan.setPosition(sf::Vector2f(dropOffPoint.x * 130 + 45, dropOffPoint.y * 130 + 45));
-		view->window.draw(dropOffMan);
+		dropOffManSprite.setPosition(sf::Vector2f(dropOffPoint.x * 130 + 45, dropOffPoint.y * 130 + 45));
+		dropOffManSprite.setColor(deliveries[i]->getColor());
+		if (deliveries[i]->getMiniMe())
+			dropOffManSprite.setScale(sf::Vector2f(2, 2));
+		else
+			dropOffManSprite.setScale(sf::Vector2f(1, 1));
+		view->window.draw(dropOffManSprite);
+		deliveries[i]->miniChange();
 	}
 }
 
