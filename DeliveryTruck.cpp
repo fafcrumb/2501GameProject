@@ -8,6 +8,7 @@ DeliveryTruck::DeliveryTruck()
 	heading = -90 * PI / 180;
 	speed = steerAngle = 0;
 	wheelBase = 130;
+	maxSpeed = 400;
 
 	texture.loadFromFile("Assets/car_green_1.png");
 	texture.setSmooth(true);
@@ -22,12 +23,12 @@ DeliveryTruck::~DeliveryTruck()
 void DeliveryTruck::update(Model* model, sf::Time deltaTime)
 {
 	//Max speed
-	if (abs(speed) > 600)
+	if (abs(speed) > maxSpeed)
 	{
 		if (speed < 0)
-			speed = -600;
+			speed = -maxSpeed;
 		else
-			speed = 600;
+			speed = maxSpeed;
 	}
 
 	//Friction
@@ -76,3 +77,13 @@ void DeliveryTruck::steerLeft() { steerAngle = -0.5; }
 void DeliveryTruck::steerRight() { steerAngle = 0.5; }
 
 void DeliveryTruck::steerStraight() { steerAngle = 0; }
+
+void DeliveryTruck::boost() { maxSpeed = 700; }
+
+void DeliveryTruck::boostOver() 
+{
+	if (maxSpeed > 400)
+	{
+		maxSpeed -= 5;
+	}
+}
