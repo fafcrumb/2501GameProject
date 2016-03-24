@@ -31,11 +31,25 @@ void Player::update(Model* model, sf::Time deltaTime)
 		y = (float)(model->mapHeight) * 130 - size / 2;
 	if (y - size / 2 <= 0)
 		y = size / 2.f;
-
-	if (model->collidingWithBuilding(playerSprite.getGlobalBounds()))
+	sf::Vector2u collision = model->collidingWithBuilding(rect.getGlobalBounds());
+	if (collision.x != 100)
 	{
-		std::cout << "COLLIDING!" << std::endl;
+		if (yMove > 0 && collision.y > row) {
+			y = y - (y - collision.y * 130) - size/2 - 1;
+			std::cout << "FFF" << std::endl;
+		}
+		else if (yMove < 0  && collision.y < row) {
+			y = y + ((collision.y * 130 + 130) - y) + size/2 + 1;
+		}
+		if (xMove > 0  && collision.x > col) {
+			x = x - (x - collision.x * 130) - size/2 - 1;
+		}
+		else if (xMove < 0 && collision.x < col) {
+			x = x + ((collision.x * 130 + 130) - x) + size/2 + 1;
+		}
 	}
+	yMove = 0;
+	xMove = 0;
 
 	col = (int)x / 130;
 	row = (int)y / 130;
@@ -48,13 +62,25 @@ void Player::render(View* view)
 		view->window.draw(playerSprite);
 }
 
-void Player::moveUp() { y -= speed; }
+void Player::moveUp() { 
+	y -= speed; 
+	yMove = -1;
+}
 
-void Player::moveDown() { y += speed; }
+void Player::moveDown() { 
+	y += speed; 
+	yMove = 1;
+}
 
-void Player::moveLeft() { x -= speed; }
+void Player::moveLeft() { 
+	x -= speed; 
+	xMove = -1;
+}
 
-void Player::moveRight() { x += speed; }
+void Player::moveRight() { 
+	x += speed; 
+	xMove = 1;
+}
 
 void Player::interact(sf::Vector2f vehicleLocation, DeliveryManager* deliveryManager)
 {
