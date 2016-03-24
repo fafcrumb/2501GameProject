@@ -30,7 +30,7 @@ void Player::update(Model* model, sf::Time deltaTime)
 		y = (float)(model->mapHeight) * 130 - size / 2;
 	if (y - size / 2 <= 0)
 		y = size / 2.f;
-	sf::Vector2u collision = model->collidingWithBuilding(rect.getGlobalBounds());
+	sf::Vector2u collision = model->collidingWithBuilding(playerSprite.getGlobalBounds());
 	if (collision.x != 100)
 	{
 		if (yMove > 0 && collision.y > row) {
