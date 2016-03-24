@@ -58,14 +58,15 @@ void Model::update(sf::Time deltaTime)
 		object->update(this, deltaTime);
 }
 
-bool Model::collidingWithBuilding(sf::FloatRect rect)
+sf::Vector2u Model::collidingWithBuilding(sf::FloatRect rect)
 {
+	sf::Vector2u null = sf::Vector2u(100,100);
 	for (int i = 0; i < tileManager->getBuildingTiles().size(); i++)
 	{
 		sf::Vector2u buildingTile = tileManager->getBuildingTiles(i);
 		sf::FloatRect buildingRect((float)buildingTile.x * 130.f, (float)buildingTile.y * 130.f, 130.f, 130.f);
 		if (rect.intersects(buildingRect))
-			return true;
+			return buildingTile;
 	}
-	return false;
+	return null;
 }
