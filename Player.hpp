@@ -36,6 +36,9 @@ private:
 	int col, row;
 	float x, y;
 	int speed;
-	sf::RectangleShape rect;
 	float size;
+
+	sf::Image playerImage;
+	sf::Texture playerTexture;
+	sf::Sprite playerSprite;
 };
