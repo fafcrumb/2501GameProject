@@ -36,7 +36,6 @@ void Player::update(Model* model, sf::Time deltaTime)
 	{
 		if (yMove > 0 && collision.y > row) {
 			y = y - (y - collision.y * 130) - size/2 - 1;
-			std::cout << "FFF" << std::endl;
 		}
 		else if (yMove < 0  && collision.y < row) {
 			y = y + ((collision.y * 130 + 130) - y) + size/2 + 1;
