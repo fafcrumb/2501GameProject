@@ -17,6 +17,7 @@ public:
 	void render(View*);
 	void speedUp(); void speedDown();
 	void steerLeft(); void steerRight(); void steerStraight();
+	void boost(); void boostOver();
 	sf::Vector2f getLocation() { return location; }
 	float getHeading() { return heading; }
 	int getCol() { return col; }
@@ -27,7 +28,7 @@ private:
 	int col, row;
 	sf::Vector2f location;
 	float heading;
-	float speed;
+	float speed, maxSpeed;
 	float steerAngle;
 	float wheelBase; // the distance between the two axles
 	sf::Texture texture;
