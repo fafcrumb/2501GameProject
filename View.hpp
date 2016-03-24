@@ -22,6 +22,7 @@ public:
 
 	TileMap map;
 	TileMap backgroundMap;
+	sf::RectangleShape miniBackground;
 
 	std::vector<Renderable*> gameViewElements;
 	std::vector<Renderable*> minimapElements;
