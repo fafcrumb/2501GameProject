@@ -27,7 +27,7 @@ DeliveryTruck::~DeliveryTruck()
 void DeliveryTruck::update(Model* model, sf::Time deltaTime)
 {
 	//Max speed
-	if (abs(speed) > 600)
+	if (abs(speed) > maxSpeed)
 	{
 		if (speed < 0)
 			speed = -maxSpeed;
