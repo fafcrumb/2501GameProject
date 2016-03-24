@@ -7,7 +7,9 @@ Delivery::Delivery(std::string itemName, std::string imageFile, sf::Vector2u pic
 	this->timeLimit = timeLimit;
 	this->pickupPoint = pickupPoint;
 	this->dropoffPoint = dropoffPoint;
-	pickedUp = droppedOff = false;
+	this->color = sf::Color(rand() % 255, rand() % 255, rand() % 255, 255);
+	pickedUp = droppedOff = miniMe = false;
+
 }
 
 Delivery::~Delivery()
