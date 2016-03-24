@@ -8,10 +8,13 @@ Player::Player()
 	x = y = 130 * (float)row + size/2;
 	speed = 3;
 
-	rect.setSize(sf::Vector2f(size, size));
-	rect.setOrigin(sf::Vector2f(size/2.f, size/2.f));
-	rect.setFillColor(sf::Color::Red);
-	rect.setPosition(sf::Vector2f(x, y));
+	playerImage.loadFromFile("Assets/actor.png");
+	playerImage.createMaskFromColor(sf::Color::White);
+	playerTexture.loadFromImage(playerImage);
+	playerTexture.setSmooth(true);
+	playerSprite.setTexture(playerTexture);
+	playerSprite.setPosition(sf::Vector2f(x, y));
+	playerSprite.setOrigin(sf::Vector2f(32, 32));
 }
 
 Player::~Player()
@@ -29,7 +32,7 @@ void Player::update(Model* model, sf::Time deltaTime)
 	if (y - size / 2 <= 0)
 		y = size / 2.f;
 
-	if (model->collidingWithBuilding(rect.getGlobalBounds()))
+	if (model->collidingWithBuilding(playerSprite.getGlobalBounds()))
 	{
 		std::cout << "COLLIDING!" << std::endl;
 	}
@@ -40,9 +43,9 @@ void Player::update(Model* model, sf::Time deltaTime)
 
 void Player::render(View* view)
 {
-	rect.setPosition(sf::Vector2f(x, y));
+	playerSprite.setPosition(sf::Vector2f(x, y));
 	if (!inVehicle)
-		view->window.draw(rect);
+		view->window.draw(playerSprite);
 }
 
 void Player::moveUp() { y -= speed; }
