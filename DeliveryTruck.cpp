@@ -32,7 +32,7 @@ void DeliveryTruck::update(Model* model, sf::Time deltaTime)
 		if (speed < 0)
 			speed = -maxSpeed;
 		else
-			speed = MaxSpeed;
+			speed = maxSpeed;
 	}
 
 	//Friction
