@@ -29,6 +29,13 @@ private:
 	float tileDistance(sf::Vector2u, sf::Vector2u);
 	float minDistance;
 
-	sf::CircleShape pickupMan;
-	sf::CircleShape dropOffMan;
+	sf::RectangleShape item;
+
+	sf::Image pickupManImage;
+	sf::Texture pickupManTexture;
+	sf::Sprite pickupManSprite;
+
+	sf::Image dropOffManImage;
+	sf::Texture dropOffManTexture;
+	sf::Sprite dropOffManSprite;
 };
