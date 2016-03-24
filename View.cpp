@@ -34,7 +34,11 @@ View::View(Model* m)
 	minimapView = window.getDefaultView();
 	minimapView.setCenter(model->mapWidth/2 * 130, model->mapHeight/2 * 130);
 	minimapView.zoom(4.5f);
-	minimapView.setViewport(sf::FloatRect(0.75f, 0, 0.25f, 0.25f));
+	minimapView.setViewport(sf::FloatRect(0.75f, 0.01f, 0.3f, 0.3f));
+
+	miniBackground.setFillColor(sf::Color::Black);
+	miniBackground.setPosition(sf::Vector2f(1050, 5));
+	miniBackground.setSize(sf::Vector2f(240, 240));
 
 	hudView = window.getDefaultView();
 	hudView.zoom(1.f);
@@ -53,13 +57,14 @@ void View::render()
 	for (Renderable* object : gameViewElements)
 		object->render(this);
 
+	window.setView(hudView);
+	window.draw(miniBackground);
+	for (Renderable* object : hudElements)
+		object->render(this);
+
 	window.setView(minimapView);
 	window.draw(map);
 	for (Renderable* object : gameViewElements)
-		object->render(this);
-	
-	window.setView(hudView);
-	for (Renderable* object : hudElements)
 		object->render(this);
 
 	window.display();
