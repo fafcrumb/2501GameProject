@@ -26,7 +26,7 @@ public:
 	~Model();
 
 	void update(sf::Time);
-	bool collidingWithBuilding(sf::FloatRect rect);
+	sf::Vector2u collidingWithBuilding(sf::FloatRect rect);
 
 	int mapWidth, mapHeight;
 	int **mapTiles;
