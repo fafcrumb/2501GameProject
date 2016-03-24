@@ -37,6 +37,8 @@ private:
 	float x, y;
 	int speed;
 	float size;
+	int yMove;
+	int xMove;
 
 	sf::Image playerImage;
 	sf::Texture playerTexture;
